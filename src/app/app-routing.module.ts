@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { DataEmitterComponent } from './data-emitter/data-emitter.component';
+import { ModuleButtonComponent } from './components/module_button/module_button.component';
 
 const routes: Routes = [
-  { path: '', component: DataEmitterComponent},
-  { path: 'data', component: DataEmitterComponent},
+  { path: '', component: ModuleButtonComponent},
+  { path: 'data', component: ModuleButtonComponent},
 ];
 
 @NgModule({

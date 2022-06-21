@@ -1,0 +1,22 @@
+<p>
+	data-emitter works!
+</p>
+
+<div>    
+    <table>
+        <tr>
+          <th>buttonId</th>
+          <th>moduleId</th>
+          <th>buttonName</th>
+          <th style="text-align: center;">buttonState</th>
+          <th>reading_time</th>
+        </tr>
+        <tr *ngFor="let x of data">
+          <td>{{ x?.buttonId }}</td>
+          <td>{{ x?.moduleId }}</td>
+          <td>{{ x?.buttonName }}</td>
+          <td>{{ x?.buttonState }}</td>
+          <td>{{ x?.reading_time }}</td>
+        </tr>
+    </table>
+  </div>

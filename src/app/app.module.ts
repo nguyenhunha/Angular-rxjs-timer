@@ -4,12 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DataEmitterComponent } from './data-emitter/data-emitter.component';
+import { ModuleButtonComponent } from './components/module_button/module_button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataEmitterComponent,
+    ModuleButtonComponent,
   ],
   imports: [
     BrowserModule,
