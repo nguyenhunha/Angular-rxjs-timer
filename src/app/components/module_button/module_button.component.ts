@@ -19,7 +19,7 @@ export class ModuleButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
-    this.subscription = timer(0, this.second * 500)    
+    this.subscription = timer(0, this.second * 1000)    
       .pipe(
         switchMap(() => {
           return this.httpClient.getData()
@@ -29,10 +29,10 @@ export class ModuleButtonComponent implements OnInit, OnDestroy {
               return of(undefined);
             }));
         }),
-        filter(data => data !== undefined)
+        filter(dataFromService => dataFromService !== undefined)
       )
-      .subscribe(data => {
-        this.data = data;
+      .subscribe(dataFromService => {
+        this.data = dataFromService;
       });
   }
 
