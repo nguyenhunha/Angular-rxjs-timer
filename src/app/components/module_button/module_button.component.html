@@ -11,11 +11,32 @@
           <th style="text-align: center;">buttonState</th>
           <th>reading_time</th>
         </tr>
+        <br/>
         <tr *ngFor="let x of data">
           <td>{{ x?.buttonId }}</td>
           <td>{{ x?.moduleId }}</td>
           <td>{{ x?.buttonName }}</td>
           <td>{{ x?.buttonState }}</td>
+          <td>{{ x?.reading_time }}</td>
+        </tr>
+    </table>
+  </div>
+<br/>
+  <div>    
+    <table>
+        <tr>
+          <th>moduleId</th>
+          <th>temperature</th>
+          <th>humidity</th>
+          <th >isClosed</th>
+          <th>reading_time</th>
+        </tr>
+        <br/>
+        <tr *ngFor="let x of status">
+          <td>{{ x?.moduleId }}</td>
+          <td>{{ x?.temperature }}</td>
+          <td>{{ x?.humidity }}</td>
+          <td>{{ x?.isClosed }}</td>
           <td>{{ x?.reading_time }}</td>
         </tr>
     </table>

@@ -18,14 +18,18 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getData(): Observable<any> {
+  getModule_Button_List(): Observable<any> {
     const url = `${this.apiurl}/module`;
     return this.httpClient
       .get<any>(url, this.httpOptions);
   }
 
 
+  getModule_Status(): Observable<any> {
+    const url = `${this.apiurl}/module/viewStatus`;
+    return this.httpClient
+      .get<any>(url, this.httpOptions);
+  }
 
 
-  
 }
