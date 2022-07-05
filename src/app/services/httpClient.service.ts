@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
@@ -18,18 +18,24 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getModule_Button_List(): Observable<any> {
-    const url = `${this.apiurl}/module`;
+  
+
+  viewStatusBy(data: any){
+    const url = `${this.apiurl}/module/viewStatusBy`;
     return this.httpClient
-      .get<any>(url, this.httpOptions);
+      .post<any>(url, data, this.httpOptions);
   }
 
-
-  getModule_Status(): Observable<any> {
-    const url = `${this.apiurl}/module/viewStatus`;
+  viewButtonBy(data: any){
+    const url = `${this.apiurl}/module/viewButtonBy`;
     return this.httpClient
-      .get<any>(url, this.httpOptions);
+      .post<any>(url, data, this.httpOptions);
   }
 
+  viewActionBy(data: any){
+    const url = `${this.apiurl}/module/viewActionBy`;
+    return this.httpClient
+      .post<any>(url, data, this.httpOptions);
+  }
 
 }

@@ -1,7 +1,7 @@
-<p>
-	Button of module
-</p>
 
+<p> {{ _chipCode}}</p>
+<p> {{ _email}}</p>
+<h1>Button List</h1>
 <div>    
     <table>
         <tr>
@@ -12,7 +12,7 @@
           <th>reading_time</th>
         </tr>
         <br/>
-        <tr *ngFor="let x of data">
+        <tr *ngFor="let x of module_button">
           <td>{{ x?.buttonId }}</td>
           <td>{{ x?.moduleId }}</td>
           <td>{{ x?.buttonName }}</td>
@@ -22,6 +22,40 @@
     </table>
   </div>
 <br/>
+
+<h1>Action</h1>
+  <div>    
+    <table>
+        <tr>
+          
+          <th>Button Name</th>
+          <th>Action</th>
+          <th>Top</th>
+          <th>Up</th>
+          <th>Stop</th>
+          <th>Down</th>
+          <th>Bottom</th>
+          <th>by</th>
+          <th>reading_time</th>
+          
+        </tr>
+        <br/>
+        <tr *ngFor="let x of module_action">
+          
+          <td>{{ x?.buttonName}}</td>
+          <td>{{ x?.actionDetail }}</td>
+          <td>{{ x?.limitSwitchTopState }}</td>
+          <td>{{ x?.buttonUpState }}</td>
+          <td>{{ x?.buttonStopState }}</td>
+          <td>{{ x?.buttonDownState }}</td>
+          <td>{{ x?.limitSwitchBottomState }}</td>          
+          <td>{{ x?.customerEmail }}</td>
+          <td>{{ x?.reading_time }}</td>
+        </tr>
+    </table>
+  </div>
+
+<h1>Status</h1>
   <div>    
     <table>
         <tr>
@@ -32,7 +66,7 @@
           <th>reading_time</th>
         </tr>
         <br/>
-        <tr *ngFor="let x of status">
+        <tr *ngFor="let x of module_status">
           <td>{{ x?.moduleId }}</td>
           <td>{{ x?.temperature }}</td>
           <td>{{ x?.humidity }}</td>
@@ -41,3 +75,4 @@
         </tr>
     </table>
   </div>
+
