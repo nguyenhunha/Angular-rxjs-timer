@@ -26,9 +26,9 @@
 <h1>Action</h1>
   <div>    
     <table>
-        <tr>
-          
+        <tr>          
           <th>Button Name</th>
+          <th>Communication</th>
           <th>Action</th>
           <th>Top</th>
           <th>Up</th>
@@ -40,9 +40,9 @@
           
         </tr>
         <br/>
-        <tr *ngFor="let x of module_action">
-          
+        <tr *ngFor="let x of module_action">          
           <td>{{ x?.buttonName}}</td>
+          <td>{{ x?.description}}</td>
           <td>{{ x?.actionDetail }}</td>
           <td>{{ x?.limitSwitchTopState }}</td>
           <td>{{ x?.buttonUpState }}</td>

@@ -39,6 +39,17 @@ CREATE TABLE IF NOT EXISTS `chip_List` (
   UNIQUE KEY `UK_chipCode` (`chipCode`)
 );
 
+
+CREATE TABLE IF NOT EXISTS `communication_List` (
+  `communicationId` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  `dateCreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`communicationId`),
+  UNIQUE KEY `UK_description` (`description`)
+);
+
+
 CREATE TABLE IF NOT EXISTS `module_List` (
   `moduleId` int(11) NOT NULL AUTO_INCREMENT,
   `chipId` INT NOT NULL,
@@ -94,6 +105,7 @@ CREATE TABLE `module_Button_List`(
 
 CREATE TABLE `module_Operating`(
     `moduleId` INT NOT NULL,
+    `communicationId` INT NOT NULL,
     `userId` INT NOT NULL,
     `buttonId` INT NOT NULL,
     `actionId` INT NOT NULL,
@@ -105,6 +117,7 @@ CREATE TABLE `module_Operating`(
     `reading_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   FOREIGN KEY (`moduleId`) REFERENCES `module_List` (`moduleId`),
+  FOREIGN KEY (`communicationId`) REFERENCES `communication_List` (`communicationId`),
   FOREIGN KEY (`userId`) REFERENCES `customer_List` (`customerId`),
   FOREIGN KEY (`buttonId`) REFERENCES `module_Button_List` (`buttonId`),
   FOREIGN KEY (`actionId`) REFERENCES `module_Action_List` (`actionId`)

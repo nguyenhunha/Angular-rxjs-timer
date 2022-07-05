@@ -3,6 +3,7 @@ delimiter $$
 	CREATE PROCEDURE module_Operating_Add(
 		IN _chipCode VARCHAR(255),
 		IN _customerEmail VARCHAR(255),
+		IN _communication VARCHAR(255),
 		IN _userName VARCHAR(255),
 		IN _buttonName VARCHAR(255),
 		IN _actionDetail VARCHAR(255),
@@ -14,23 +15,32 @@ delimiter $$
 		OUT message VARCHAR(255))
 	BEGIN
 		CALL `customer_List_Add`(_userName, '', '', @msgCustomer);		
+				
 		
 		CALL `customer_findEmail`(_customerEmail, @customerId, @msgCustomer);
 		CALL `chip_findCode`(_chipCode, @chipId, @msgChip);
-		IF (@customerId != 0 && @chipId != 0) THEN 
+		IF (@customerId != 0 && @chipId != 0 ) THEN 
 			CALL `module_find`(_chipCode, _customerEmail,  @moduleId, @msgModule);
 			CALL `customer_findEmail`(_userName, @userId, @msgCustomer);
-			IF (@moduleId != 0 && @userId != 0) THEN
+			
+
+			IF (@moduleId != 0 && @userId != 0 ) THEN
+				CALL `communication_List_Add`(_communication, @msgCustomer);
 				CALL `module_Button_List_AddOrUpdate`(	@moduleId, _buttonName, 
 														_limitSwitchTopState, _buttonUpState, 
 														_buttonDownState, _limitSwitchBottomState, @msgButton);
 				CALL `module_Action_List_Add`(@moduleId, _actionDetail, @msgAction);
 				
+
+				CALL `communication_find`(_communication, @communicationId, @msgChip);
 				CALL `module_Action_List_Find`(@moduleId , _actionDetail, @actionId, @msgAction);
 				CALL `module_Button_List_Find`(@moduleId , _buttonName, @buttonId, @buttonState, @msgButton);
-				IF (@buttonId != 0 && @actionId != 0) THEN
+				
+				
+				IF (@buttonId != 0 && @actionId != 0 && @communicationId != 0) THEN
 					INSERT INTO `module_Operating`(
 						`moduleId`,
+						`communicationId`,
 						`userId`,
 						`buttonId`,
 						`actionId`,
@@ -41,6 +51,7 @@ delimiter $$
 						`limitSwitchBottomState`)
 					VALUES(
 						@moduleId, 
+						@communicationId,
 						@userId, 
 						@buttonId, 
 						@actionId, 
@@ -76,6 +87,7 @@ delimiter $$
 			CALL `module_find`(_chipCode, _customerEmail,  @moduleId, @msgModule);
 			IF (@moduleId != 0) THEN
 				SELECT 	T4.customerEmail,
+						T5.description,
 						T2.buttonName,
 						T3.actionDetail,
 						limitSwitchTopState,
@@ -88,6 +100,7 @@ delimiter $$
 				INNER JOIN `module_Button_List` AS T2 ON T1.`buttonId` = T2.`buttonId`
 				INNER JOIN `module_Action_List` AS T3 ON T1.`actionId` = T3.`actionId`
 				INNER JOIN `customer_List` AS T4 ON T1.`userId` = T4.`customerId`
+				INNER JOIN `communication_List` AS T5 ON T1.`communicationId` = T5.`communicationId`
 				WHERE T1.`moduleId` = @moduleId
 				ORDER BY reading_time DESC
 				LIMIT 10;
